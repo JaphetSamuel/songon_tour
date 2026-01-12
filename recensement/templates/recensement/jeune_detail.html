@@ -1,0 +1,345 @@
+{% extends 'home/layout/base.html' %}
+{% load static %}
+
+{% block title %}{{ jeune.prenom }} {{ jeune.nom }} - Profil{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <div class="page-title__bg" style="background-image: url({% static 'assets/images/backgrounds/page-title-bg.jpg' %});"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <h1 class="page-title__title">Profil de {{ jeune.prenom }} {{ jeune.nom }}</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Page Title -->
+
+<!--Start About Two -->
+<section class="about-two about-two--about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="contact-one__form-box">
+                    <div class="profile-header">
+                        <h2 class="contact-one__title">{{ jeune.prenom }} {{ jeune.nom }}</h2>
+                        <div class="profile-actions">
+                            <a href="{% url 'jeune_update' jeune.pk %}" class="thm-btn thm-btn--secondary">
+                                <i class="icon-edit"></i> Modifier
+                            </a>
+                            <a href="{% url 'jeune_list' %}" class="thm-btn thm-btn--white">
+                                <i class="icon-arrow-left"></i> Retour
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="profile-content">
+                        <!-- Informations Personnelles -->
+                        <div class="info-section">
+                            <h3 class="section-title">Informations Personnelles</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Matricule:</span>
+                                        <span class="info-value"><strong>{{ jeune.matricule }}</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Numéro CNI:</span>
+                                        <span class="info-value">{{ jeune.numero_cni }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Nom:</span>
+                                        <span class="info-value">{{ jeune.nom }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Prénom:</span>
+                                        <span class="info-value">{{ jeune.prenom }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">Âge:</span>
+                                        <span class="info-value">{{ jeune.age }} ans</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">Genre:</span>
+                                        <span class="info-value">{{ jeune.genre }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">Zone:</span>
+                                        <span class="info-value">{{ jeune.zone }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Adresse et Contact -->
+                        <div class="info-section">
+                            <h3 class="section-title">Adresse et Contact</h3>
+                            
+                            <div class="info-item full-width">
+                                <span class="info-label">Adresse:</span>
+                                <span class="info-value">{{ jeune.adresse }}</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Téléphone principal:</span>
+                                        <span class="info-value">
+                                            <a href="tel:{{ jeune.telephone }}">{{ jeune.telephone }}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Téléphone secondaire:</span>
+                                        <span class="info-value">
+                                            {% if jeune.telephone2 %}
+                                                <a href="tel:{{ jeune.telephone2 }}">{{ jeune.telephone2 }}</a>
+                                            {% else %}
+                                                <em>Non renseigné</em>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-item full-width">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value">
+                                    {% if jeune.email %}
+                                        <a href="mailto:{{ jeune.email }}">{{ jeune.email }}</a>
+                                    {% else %}
+                                        <em>Non renseigné</em>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Éducation et Compétences -->
+                        <div class="info-section">
+                            <h3 class="section-title">Éducation et Compétences</h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Niveau d'étude:</span>
+                                        <span class="info-value">
+                                            {% if jeune.Niveau_etude %}
+                                                {{ jeune.Niveau_etude }}
+                                            {% else %}
+                                                <em>Non renseigné</em>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Domaine d'activité:</span>
+                                        <span class="info-value">
+                                            {% if jeune.Domaine_activite %}
+                                                {{ jeune.Domaine_activite }}
+                                            {% else %}
+                                                <em>Non renseigné</em>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-item full-width">
+                                <span class="info-label">Compétences:</span>
+                                <span class="info-value" style="white-space: pre-wrap;">{{ jeune.competences }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-footer">
+                        <a href="{% url 'jeune_update' jeune.pk %}" class="thm-btn thm-btn--secondary">
+                            <i class="icon-edit"></i> Modifier ce profil
+                        </a>
+                        <a href="{% url 'jeune_delete' jeune.pk %}" class="thm-btn thm-btn--danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce profil?');">
+                            <i class="icon-trash"></i> Supprimer
+                        </a>
+                        <a href="{% url 'jeune_list' %}" class="thm-btn thm-btn--white">
+                            <i class="icon-arrow-left"></i> Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End About Two -->
+
+<style>
+    .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .profile-header h2 {
+        margin: 0;
+    }
+
+    .profile-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .profile-content {
+        margin: 2rem 0;
+    }
+
+    .info-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .info-section:last-child {
+        border-bottom: none;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #007bff;
+        display: inline-block;
+    }
+
+    .info-item {
+        margin-bottom: 1.2rem;
+    }
+
+    .info-item.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .info-label {
+        display: block;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 0.3rem;
+        font-size: 0.95rem;
+    }
+
+    .info-value {
+        display: block;
+        color: #333;
+        font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+        background-color: #f9f9f9;
+        border-left: 3px solid #007bff;
+        border-radius: 2px;
+    }
+
+    .info-value a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .info-value a:hover {
+        text-decoration: underline;
+    }
+
+    .profile-footer {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .thm-btn--secondary {
+        background-color: #6c757d;
+    }
+
+    .thm-btn--secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .thm-btn--white {
+        background-color: #f4f4f4;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .thm-btn--white:hover {
+        background-color: #e0e0e0;
+    }
+
+    .thm-btn--danger {
+        background-color: #dc3545;
+    }
+
+    .thm-btn--danger:hover {
+        background-color: #c82333;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .profile-header h2 {
+            text-align: center;
+        }
+
+        .profile-actions {
+            justify-content: stretch;
+        }
+
+        .profile-actions .thm-btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-footer {
+            flex-direction: column;
+        }
+
+        .profile-footer .thm-btn {
+            width: 100%;
+        }
+
+        .row {
+            flex-direction: column;
+        }
+
+        .col-md-4,
+        .col-md-6 {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

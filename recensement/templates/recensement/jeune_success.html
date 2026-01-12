@@ -1,0 +1,298 @@
+{% extends 'home/layout/base.html' %}
+{% load static %}
+
+{% block title %}Enregistrement Réussi{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <div class="page-title__bg" style="background-image: url({% static 'assets/images/backgrounds/page-title-bg.jpg' %});"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <h1 class="page-title__title">Enregistrement Réussi!</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Page Title -->
+
+<!--Start About Two -->
+<section class="about-two about-two--about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 offset-xl-3">
+                <div class="success-box">
+                    <div class="success-icon">
+                        <i class="icon-check-circle"></i>
+                    </div>
+                    
+                    <h2 class="success-title">Bienvenue {{ prenom }} {{ nom }}!</h2>
+                    
+                    <div class="success-message">
+                        <p>Votre enregistrement a été complété avec succès.</p>
+                        <p>Un compte utilisateur a été créé automatiquement pour vous.</p>
+                    </div>
+
+                    <div class="credentials-card">
+                        <h3>📋 Vos Identifiants de Connexion</h3>
+                        
+                        <div class="credential-item">
+                            <label>Matricule:</label>
+                            <div class="credential-value">
+                                <span id="matricule">{{ matricule }}</span>
+                                <button type="button" class="copy-btn" onclick="copierAuPresse('matricule')">
+                                    <i class="icon-copy"></i> Copier
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="credential-item">
+                            <label>Nom d'utilisateur:</label>
+                            <div class="credential-value">
+                                <span id="username">{{ username }}</span>
+                                <button type="button" class="copy-btn" onclick="copierAuPresse('username')">
+                                    <i class="icon-copy"></i> Copier
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="credential-item">
+                            <label>Mot de passe temporaire:</label>
+                            <div class="credential-value">
+                                <span id="password" class="password-hidden">{{ password }}</span>
+                                <button type="button" class="toggle-btn" onclick="afficherMotDePasse()">
+                                    <i class="icon-eye"></i> Afficher
+                                </button>
+                                <button type="button" class="copy-btn" onclick="copierAuPresse('password')">
+                                    <i class="icon-copy"></i> Copier
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4>⚠️ Important:</h4>
+                        <ul>
+                            <li>Conservez ces identifiants en sécurité</li>
+                            <li>Changez votre mot de passe après votre première connexion</li>
+                            <li>Les identifiants ont aussi été envoyés à votre email</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="{% url 'login' %}" class="thm-btn">
+                            <i class="icon-login"></i> Se Connecter
+                        </a>
+                        <a href="/" class="thm-btn thm-btn--white">
+                            <i class="icon-arrow-left"></i> Accueil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End About Two -->
+
+<script>
+function copierAuPresse(id) {
+    const texte = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(texte).then(() => {
+        const btn = event.target.closest('.copy-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="icon-check"></i> Copié!';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+        }, 2000);
+    });
+}
+
+function afficherMotDePasse() {
+    const pwElement = document.getElementById('password');
+    const btn = event.target.closest('.toggle-btn');
+    
+    if (pwElement.classList.contains('password-hidden')) {
+        pwElement.classList.remove('password-hidden');
+        btn.innerHTML = '<i class="icon-eye-off"></i> Masquer';
+    } else {
+        pwElement.classList.add('password-hidden');
+        btn.innerHTML = '<i class="icon-eye"></i> Afficher';
+    }
+}
+</script>
+
+<style>
+    .success-box {
+        background: white;
+        border-radius: 10px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+
+    .success-title {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .success-message {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+    }
+
+    .credentials-card {
+        background: #f8f9fa;
+        border-left: 4px solid #007bff;
+        padding: 25px;
+        border-radius: 5px;
+        margin: 30px 0;
+        text-align: left;
+    }
+
+    .credentials-card h3 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .credential-item {
+        margin-bottom: 20px;
+    }
+
+    .credential-item label {
+        display: block;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+    }
+
+    .credential-value {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: white;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .credential-value span {
+        flex: 1;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        color: #007bff;
+        user-select: all;
+    }
+
+    .password-hidden {
+        filter: blur(5px);
+        user-select: none;
+    }
+
+    .copy-btn,
+    .toggle-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+        white-space: nowrap;
+    }
+
+    .copy-btn:hover,
+    .toggle-btn:hover {
+        background: #0056b3;
+    }
+
+    .info-box {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        color: #856404;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 30px 0;
+        text-align: left;
+    }
+
+    .info-box h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .info-box ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .info-box li {
+        margin-bottom: 8px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .thm-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .thm-btn--white {
+        background-color: #f4f4f4;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .thm-btn--white:hover {
+        background-color: #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+        .success-box {
+            padding: 25px 20px;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+        }
+
+        .credential-value {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .copy-btn,
+        .toggle-btn {
+            width: 100%;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .thm-btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

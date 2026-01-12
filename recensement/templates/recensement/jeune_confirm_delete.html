@@ -1,0 +1,160 @@
+{% extends 'home/layout/base.html' %}
+{% load static %}
+
+{% block title %}Confirmer la suppression{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <div class="page-title__bg" style="background-image: url({% static 'assets/images/backgrounds/page-title-bg.jpg' %});"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <h1 class="page-title__title">Confirmer la suppression</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Page Title -->
+
+<!--Start About Two -->
+<section class="about-two about-two--about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 offset-xl-3">
+                <div class="contact-one__form-box delete-confirmation">
+                    <div class="delete-icon">
+                        <i class="icon-trash"></i>
+                    </div>
+
+                    <h2 class="contact-one__title">Attention !</h2>
+
+                    <div class="delete-message">
+                        <p>
+                            Êtes-vous sûr de vouloir supprimer le profil de <strong>{{ object.prenom }} {{ object.nom }}</strong> ?
+                        </p>
+                        <p>
+                            <span class="badge bg-warning">Matricule: {{ object.matricule }}</span>
+                        </p>
+                        <p class="warning-text">
+                            <i class="icon-alert-circle"></i>
+                            Cette action est <strong>irréversible</strong> et supprimera toutes les données associées à ce profil.
+                        </p>
+                    </div>
+
+                    <form method="post" action="" class="delete-form">
+                        {% csrf_token %}
+                        <div class="form-buttons">
+                            <button type="submit" class="thm-btn thm-btn--danger">
+                                <i class="icon-trash"></i> Supprimer définitivement
+                            </button>
+                            <a href="{% url 'jeune_detail' object.pk %}" class="thm-btn thm-btn--white">
+                                <i class="icon-close"></i> Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End About Two -->
+
+<style>
+    .delete-confirmation {
+        text-align: center;
+        padding: 3rem 2rem;
+    }
+
+    .delete-icon {
+        font-size: 4rem;
+        color: #dc3545;
+        margin-bottom: 1.5rem;
+    }
+
+    .delete-message {
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        border-left: 4px solid #dc3545;
+    }
+
+    .delete-message p {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .delete-message p:last-child {
+        margin-bottom: 0;
+    }
+
+    .badge {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        margin: 1rem 0;
+    }
+
+    .warning-text {
+        color: #dc3545;
+        font-weight: 500;
+    }
+
+    .warning-text i {
+        margin-right: 0.5rem;
+    }
+
+    .delete-form {
+        margin-top: 2rem;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .thm-btn--danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+
+    .thm-btn--danger:hover {
+        background-color: #c82333;
+    }
+
+    .thm-btn--white {
+        background-color: #f4f4f4;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .thm-btn--white:hover {
+        background-color: #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+        .delete-confirmation {
+            padding: 2rem 1rem;
+        }
+
+        .delete-icon {
+            font-size: 3rem;
+        }
+
+        .delete-message {
+            padding: 1.5rem;
+        }
+
+        .form-buttons {
+            flex-direction: column;
+        }
+
+        .form-buttons .thm-btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

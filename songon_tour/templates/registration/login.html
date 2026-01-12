@@ -1,0 +1,170 @@
+{% extends "home/layout/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-dark">
+                            {% trans "Connexion" %}
+                        </h2>
+                        <p class="text-muted">
+                            {% trans "Accédez à votre compte Songon" %}
+                        </p>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% trans "Erreur de connexion" %}
+                            {% for error in form.non_field_errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+
+                        <!-- Username Field -->
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label fw-bold">
+                                {% trans "Nom d'utilisateur" %}
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-control form-control-lg {% if form.username.errors %}is-invalid{% endif %}" 
+                                id="id_username" 
+                                name="username" 
+                                placeholder="{% trans 'Entrez votre matricule' %}"
+                                value="{{ form.username.value|default:'' }}"
+                                required
+                            >
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.username.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted d-block mt-2">
+                                {% trans "Exemple: J00789" %}
+                            </small>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label fw-bold">
+                                {% trans "Mot de passe" %}
+                            </label>
+                            <input 
+                                type="password" 
+                                class="form-control form-control-lg {% if form.password.errors %}is-invalid{% endif %}" 
+                                id="id_password" 
+                                name="password" 
+                                placeholder="{% trans 'Entrez votre mot de passe' %}"
+                                required
+                            >
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.password.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="form-check mb-4">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                id="remember_me" 
+                                name="remember_me"
+                            >
+                            <label class="form-check-label" for="remember_me">
+                                {% trans "Se souvenir de moi" %}
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold mb-3">
+                            {% trans "Se Connecter" %}
+                        </button>
+
+                        <!-- Help Text -->
+                        <div class="text-center">
+                            <p class="text-muted small">
+                                {% trans "Vous avez oublié vos identifiants?" %}
+                                <a href="#" class="text-primary fw-bold">
+                                    {% trans "Contactez l'administration" %}
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <!-- Additional Info -->
+                    <div class="alert alert-info" role="alert">
+                        <small>
+                            <strong>{% trans "💡 Astuce:" %}</strong>
+                            {% trans "Si vous n'avez pas reçu vos identifiants, rendez-vous à" %}
+                            <a href="{% url 'home:home' %}" class="text-primary fw-bold">
+                                {% trans "l'enregistrement" %}
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New User Link -->
+            <div class="text-center mt-4">
+                <p class="text-muted">
+                    {% trans "Nouvel utilisateur?" %}
+                    <a href="{% url 'home:home' %}" class="text-primary fw-bold text-decoration-none">
+                        {% trans "Enregistrez-vous maintenant" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .card {
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    .alert-info {
+        border-left: 4px solid #0c5460;
+    }
+</style>
+{% endblock %}

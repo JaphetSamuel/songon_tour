@@ -1,0 +1,11 @@
+Django>=5.0
+djangocms-versioning
+djangocms-alias
+djangocms-frontend>=2.0.0a1
+django-filer
+djangocms-text
+django-fsm<3
+djangocms-simple-admin-style
+gunicorn
+psycopg2-binary  # Pour PostgreSQL (optionnel)
+Pillow  # Pour les images

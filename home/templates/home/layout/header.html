@@ -1,0 +1,168 @@
+ {% load static %}
+ <!--Start Main Header One-->
+        <header class="main-header main-header-one style2">
+            <!--Start Main Header One Top-->
+            <div class="main-header-one__top">
+                <div class="auto-container">
+                    <div class="main-header-one__top-inner">
+
+                        <div class="main-header-one__top-left">
+                            <div class="logo-box-one">
+                                <a href="index.html">
+                                    <img width="30px" src="{% static 'assets/images/resources/logo_1p.png' %}" alt="Awesome Logo" title="">
+                                </a>
+                            </div>
+
+                           <!-- <ul class="main-header-menu-box">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Cause</a></li>
+                                <li><a href="#">Charity</a></li>
+                            </ul> -->
+                        </div>
+
+                        <div class="main-header-one__top-middle">
+                            <div class="main-header__contact-info">
+                                <ul>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="icon-box">
+                                                <img src="{% static 'assets/images/resources/logo.jpg' %}" alt="Senat des jeunes" title="">
+                                            </div>
+                                            <div class="text-box">
+                                                <p>Une Initiative du SJCI - Songon</p>
+                                                <h4>Sénat des jeunes de Côte d'Ivoire - Songon</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inner">
+                                            <div class="icon-box">
+                                                <span class="icon-facebook-logo"></span>
+                                            </div>
+                                            <div class="text-box">
+                                                <p>Reseau Social</p>
+                                                <h4><a href="">SJCI - SONGON</a></h4>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inner">
+                                            <div class="icon-box">
+                                                <span class="icon-phone-call"></span>
+                                            </div>
+                                            <div class="text-box">
+                                                <p>Contact</p>
+                                                <h4><a href="">+225 88 57 00 24 51</a></h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="main-header-two__top-right">
+                            <ul class="header-social-links">
+                                <li>
+                                    <a class="style2" href="#"><span class="icon-linkedin"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon-twitter"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon-facebook-logo"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon-skype"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Main Header One Top-->
+
+
+            <!--Start Main Header One Bottom-->
+            <div class="main-header-one__bottom">
+                <div class="main-header-one__bottom-inner">
+                    <nav class="main-menu main-menu-one">
+                        <div class="main-menu__wrapper clearfix">
+                            <div class="auto-container">
+                                <div class="main-menu__wrapper-inner">
+
+                                    <div class="main-header-one__bottom-left">
+                                        <div class="main-header-two__bottom-left-text">
+                                          
+                                        </div>
+                                        <div class="main-menu-box">
+                                            <a href="#" class="mobile-nav__toggler">
+                                                <i class="fa fa-bars"></i>
+                                            </a>
+                                            <ul class="main-menu__list">
+                                                
+
+                                                <li class="current">
+                                                    <a href="{% url 'home:home' %}">Accueil</a>
+                                                </li>
+
+
+                                                <li>
+                                                    <a href="">Contact</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="main-header-one__bottom-right">
+                                        <div class="btn-box1">
+                                            <a href="contact.html">
+                                                {% if user.is_authenticated %}
+                                                    <span class="txt">{{ user.username }}</span>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+
+                                        <div class="btn-box2">
+                                            <a href="{% url 'jeune_create' %}">Se recenser</a>
+                                        </div>
+
+                                        <div class="header-search-box">
+                                            <a href="#" class="main-menu__search search-toggler icon-search">
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!--End Main Header One Bottom-->
+        </header>
+        <!--End Main Header One-->
+
+        <div class="stricky-header stricky-header--one style2 stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+
+        <!--Start Page Header->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
+            </div>
+
+            <div class="container">
+                <div class="page-header__inner text-center">
+                    <h2>About us</h2>
+                    <ul class="thm-breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li><span>-</span></li>
+                        <li>About us</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Header-->

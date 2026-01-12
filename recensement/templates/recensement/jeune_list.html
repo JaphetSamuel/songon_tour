@@ -1,0 +1,243 @@
+{% extends 'home/layout/base.html' %}
+{% load static %}
+
+{% block title %}Liste des Jeunes Enregistrés{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <div class="page-title__bg" style="background-image: url({% static 'assets/images/backgrounds/page-title-bg.jpg' %});"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <h1 class="page-title__title">Jeunes Enregistrés</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Page Title -->
+
+<!--Start About Two -->
+<section class="about-two about-two--about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="contact-one__form-box">
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="list-header">
+                        <h2 class="contact-one__title">Total: {{ jeunes.paginator.count }} jeunes enregistrés</h2>
+                        <a href="{% url 'jeune_create' %}" class="thm-btn">
+                            <i class="icon-plus"></i> Ajouter un nouveau jeune
+                        </a>
+                    </div>
+
+                    {% if jeunes %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom et Prénom</th>
+                                        <th>Âge</th>
+                                        <th>Genre</th>
+                                        <th>Téléphone</th>
+                                        <th>Zone</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for jeune in jeunes %}
+                                        <tr>
+                                            <td>
+                                                <span class="badge bg-primary">{{ jeune.matricule }}</span>
+                                            </td>
+                                            <td>
+                                                <strong>{{ jeune.prenom }} {{ jeune.nom }}</strong>
+                                            </td>
+                                            <td>{{ jeune.age }} ans</td>
+                                            <td>{{ jeune.genre }}</td>
+                                            <td>{{ jeune.telephone }}</td>
+                                            <td>{{ jeune.zone }}</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <a href="{% url 'jeune_detail' jeune.pk %}" class="btn btn-info btn-sm" title="Voir les détails">
+                                                        <i class="icon-eye"></i> Voir
+                                                    </a>
+                                                    <a href="{% url 'jeune_update' jeune.pk %}" class="btn btn-warning btn-sm" title="Modifier">
+                                                        <i class="icon-edit"></i> Modifier
+                                                    </a>
+                                                    <a href="{% url 'jeune_delete' jeune.pk %}" class="btn btn-danger btn-sm" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce jeune?');">
+                                                        <i class="icon-trash"></i> Supprimer
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        {% if is_paginated %}
+                            <nav class="pagination-wrapper" aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1">Première</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == num %}
+                                            <li class="page-item active">
+                                                <span class="page-link">
+                                                    {{ num }}
+                                                    <span class="sr-only">(current)</span>
+                                                </span>
+                                            </li>
+                                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Dernière</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-info text-center">
+                            <p>Aucun jeune enregistré pour le moment.</p>
+                            <a href="{% url 'jeune_create' %}" class="thm-btn" style="margin-top: 1rem;">
+                                <i class="icon-plus"></i> Enregistrer un nouveau jeune
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End About Two -->
+
+<style>
+    .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .list-header .thm-btn {
+        white-space: nowrap;
+    }
+
+    .table-responsive {
+        margin-bottom: 2rem;
+    }
+
+    .table {
+        border-collapse: collapse;
+    }
+
+    .table thead {
+        background-color: #333;
+        color: white;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        padding: 1rem;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+    }
+
+    .pagination-wrapper {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #ddd;
+    }
+
+    .pagination .page-link {
+        color: #007bff;
+        border: 1px solid #dee2e6;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .pagination .page-link:hover {
+        color: #0056b3;
+        background-color: #e9ecef;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .list-header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .list-header .thm-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .table-responsive {
+            font-size: 0.875rem;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-sm {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

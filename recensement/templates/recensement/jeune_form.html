@@ -1,0 +1,309 @@
+{% extends 'home/layout/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Modifier le profil - {{ form.instance.prenom }} {{ form.instance.nom }}
+    {% else %}
+        Formulaire de Recensement des Jeunes
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <div class="page-title__bg" style="background-image: url({% static 'assets/images/backgrounds/page-title-bg.jpg' %});"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <h1 class="page-title__title">
+                    {% if form.instance.pk %}
+                        Modifier les Informations
+                    {% else %}
+                        Formulaire de Recensement
+                    {% endif %}
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Page Title -->
+
+<!--Start About Two -->
+<section class="about-two about-two--about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="contact-one__form-box">
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <h2 class="contact-one__title">
+                        {% if form.instance.pk %}
+                            Mettre à jour votre profil
+                        {% else %}
+                            Enregistrez-vous
+                        {% endif %}
+                    </h2>
+
+                    <form method="post" action="{% if form.instance.pk %}{% url 'jeune_update' form.instance.pk %}{% else %}{% url 'jeune_create' %}{% endif %}" class="contact-one__form" id="reviewForm" novalidate="novalidate">
+                        {% csrf_token %}
+
+                        <!-- Informations Personnelles -->
+                        <fieldset>
+                            <legend class="form-section-title">Informations Personnelles</legend>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.nom.label_tag }}
+                                        {{ form.nom }}
+                                        {% if form.nom.errors %}
+                                            <span class="error-message">{{ form.nom.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.prenom.label_tag }}
+                                        {{ form.prenom }}
+                                        {% if form.prenom.errors %}
+                                            <span class="error-message">{{ form.prenom.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {{ form.age.label_tag }}
+                                        {{ form.age }}
+                                        {% if form.age.errors %}
+                                            <span class="error-message">{{ form.age.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {{ form.genre.label_tag }}
+                                        {{ form.genre }}
+                                        {% if form.genre.errors %}
+                                            <span class="error-message">{{ form.genre.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {{ form.numero_cni.label_tag }}
+                                        {{ form.numero_cni }}
+                                        {% if form.numero_cni.errors %}
+                                            <span class="error-message">{{ form.numero_cni.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Adresse et Contact -->
+                        <fieldset>
+                            <legend class="form-section-title">Adresse et Contact</legend>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.zone.label_tag }}
+                                        {{ form.zone }}
+                                        {% if form.zone.errors %}
+                                            <span class="error-message">{{ form.zone.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.adresse.label_tag }}
+                                        {{ form.adresse }}
+                                        {% if form.adresse.errors %}
+                                            <span class="error-message">{{ form.adresse.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.telephone.label_tag }}
+                                        {{ form.telephone }}
+                                        {% if form.telephone.errors %}
+                                            <span class="error-message">{{ form.telephone.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.telephone2.label_tag }}
+                                        {{ form.telephone2 }}
+                                        {% if form.telephone2.errors %}
+                                            <span class="error-message">{{ form.telephone2.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <span class="error-message">{{ form.email.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+
+                        <!-- Éducation et Compétences -->
+                        <fieldset>
+                            <legend class="form-section-title">Éducation et Compétences</legend>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.Niveau_etude.label_tag }}
+                                        {{ form.Niveau_etude }}
+                                        {% if form.Niveau_etude.errors %}
+                                            <span class="error-message">{{ form.Niveau_etude.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.Domaine_activite.label_tag }}
+                                        {{ form.Domaine_activite }}
+                                        {% if form.Domaine_activite.errors %}
+                                            <span class="error-message">{{ form.Domaine_activite.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.competences.label_tag }}
+                                {{ form.competences }}
+                                {% if form.competences.errors %}
+                                    <span class="error-message">{{ form.competences.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group button-group">
+                            <button type="submit" class="thm-btn">
+                                {% if form.instance.pk %}
+                                    Mettre à jour
+                                {% else %}
+                                    S'enregistrer
+                                {% endif %}
+                            </button>
+                            <a href="{% url 'jeune_list' %}" class="thm-btn thm-btn--white">
+                                Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End About Two -->
+
+<style>
+    .form-section-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 0.5rem;
+        display: block;
+    }
+
+    fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+        display: block;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: block;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        justify-content: center;
+    }
+
+    .thm-btn--white {
+        background-color: #f4f4f4;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .thm-btn--white:hover {
+        background-color: #e0e0e0;
+    }
+</style>
+{% endblock %}

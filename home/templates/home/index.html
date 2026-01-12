@@ -1,0 +1,127 @@
+{% extends "home/layout/base.html" %}
+{% load static %}
+
+{% block content %}
+   
+        <!--Start Main Slider Two-->
+        <section class="main-slider main-slider-one style2">
+            <div class="main-slider-one__inner">
+                <div class="owl-carousel owl-theme thm-owl__carousel testimonial-one__carousel nav-style1 dot-style1"
+                    data-owl-options='{
+                            "loop": true,
+                            "autoplay": true,
+                            "margin": 0,
+                            "nav": true,
+                            "dots": true,
+                            "smartSpeed": 500,
+                            "animateOut": "slideOutDown",
+                            "animateIn": "fadeIn",
+                            "autoplayTimeout": 10000,
+                            "navText": ["<span class=\"icon-arrow-right1\"></span>","<span class=\"icon-arrow-right\"></span>"],
+                            "responsive": {
+                                    "0": {
+                                        "items": 1
+                                    },
+                                    "768": {
+                                        "items": 1
+                                    },
+                                    "992": {
+                                        "items": 1
+                                    },
+                                    "1200": {
+                                        "items": 1
+                                    }
+                                }
+                            }'>
+
+                    <!--Start Main Slider One Single-->
+                    <div class="main-slider-one__single">
+                        <div class="image-layer" style="background-image:url(assets/images/slides/slider-v2-img1.jpg)">
+                        </div>
+                        <div class="shape3"><img src="{% static 'assets/images/shapes/shapc1.jpg' %}" alt="#"></div>
+                        <div class="container">
+                            <div class="main-slider-one__content text-center">
+                                <div class="tagline">
+                                    <span>recensement</span>
+                                </div>
+                                <div class="title">
+                                    <h2>Je m'enregistre en tant que jeune</h2>
+                                </div>
+
+                                <div class="text">
+                                    <p>Enregistrer vos informations personnelles et professionnelles.</p>
+                                </div>
+
+                                <div class="btn-box">
+                                    <a class="thm-btn" href="{% url 'jeune_create' %}" >
+                                        <span class="txt">m'enregistrer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Main Slider One Single-->
+
+                    <!--Start Main Slider One Single-->
+                    <div class="main-slider-one__single">
+                        <div class="image-layer" style="background-image:url(assets/images/slides/slider-v2-img2.jpg)">
+                        </div>
+                        <div class="shape3"><img src="{% static 'assets/images/shapes/shapc3.jpg' %}" alt="#"></div>
+                        <div class="container">
+                            <div class="main-slider-one__content text-center">
+                                <div class="tagline">
+                                    <span>Informations</span>
+                                </div>
+                                <div class="title">
+                                    <h2>Je suis informé des opportunités</h2>
+                                </div>
+
+                                <div class="text">
+                                    <p>Vous recevrez des informations personnalisées, sur les opportunités qui pourraient vous intéresser.</p>
+                                </div>
+
+                                <div class="btn-box">
+                                    <a class="thm-btn" href="{% url 'jeune_create' %}" >
+                                        <span class="txt">m'enregistrer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Main Slider One Single-->
+
+                    <!--Start Main Slider One Single-->
+                    <div class="main-slider-one__single">
+                        <div class="image-layer" style="background-image:url(assets/images/slides/slider-v2-img3.jpg)">
+                        </div>
+                        <div class="shape3"><img src="{% static 'assets/images/shapes/shapc2.jpg' %}" alt="#"></div>
+                        <div class="container">
+                            <div class="main-slider-one__content text-center">
+                                <div class="tagline">
+                                    <span>contribution</span>
+                                </div>
+                                <div class="title">
+                                    <h2>Je participe au développement de ma commune</h2>
+                                </div>
+
+                                <div class="text">
+                                    <p>
+                                        je contribue à l'amélioration des politiques publiques locales grâce à mes données.
+                                    </p>
+                                </div>
+
+                                <div class="btn-box">
+                                     <a class="thm-btn" href="{% url 'jeune_create' %}" >
+                                        <span class="txt">m'enregistrer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Main Slider One Single-->
+
+                </div>
+            </div>
+        </section>
+        <!--End Main Slider Two-->
+{% endblock content%}
